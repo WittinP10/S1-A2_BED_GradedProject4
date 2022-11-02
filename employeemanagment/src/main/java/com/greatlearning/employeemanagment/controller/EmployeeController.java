@@ -1,5 +1,6 @@
 package com.greatlearning.employeemanagment.controller;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import com.greatlearning.employeemanagment.repository.EmployeeRepository;
 import com.greatlearning.employeemanagment.service.EmployeeService;
 
 
-@RestController("/employeemanagement")
+@RestController("/api")
 public class EmployeeController {
 
 
@@ -28,7 +29,7 @@ public class EmployeeController {
 	}
 	
 	//get all employee
-	@GetMapping("/getall")
+	@GetMapping("/employee")
 	public Set<Employee> getEmployee(){
 		
 	
@@ -37,7 +38,7 @@ public class EmployeeController {
 		}
 	
 	//get specific employee
-	@GetMapping("/getemployee/{id}")
+	@GetMapping("/employee/{id}")
 	public Employee getEmployeeById(@PathVariable("id") int id) {
 		
 		return this.employeeService.fetchById(id);
@@ -50,23 +51,37 @@ public class EmployeeController {
 	}
 	
 	//add an employee
-	@PostMapping("/addemployee")
+	@PostMapping("/employee/add")
 	public Employee saveEmployee (@RequestBody Employee employee){
 		
 		return this.employeeService.addEmployee(employee);
 	}
 	
-	@DeleteMapping("/deleteemployee/{id}")
+	@DeleteMapping("/employee/delete/{id}")
 	public void deleteEmployee(@PathVariable("id") int id) {
 		
 		this.employeeService.deleteEmployee(id);
 	
 	}
 	
-	@PutMapping("/updateemployee/{id}")
+	@PutMapping("/employee/update/{id}")
 	public Employee updateEmployee (@PathVariable("id") int id,@RequestBody Employee employee){
 		
 		 return this.employeeService.updateEmployee(id,employee);
+	}
+	
+	@GetMapping("/employee/get/{name}")
+	public Set<Employee> getEmployeeByName(@PathVariable("name") String name) {
+		
+		return this.employeeService.fetchByName(name);
+		
+	}
+	
+	@GetMapping("/employee/sort/{order}")
+	public List<Employee> getEmployeeByAsc(@PathVariable("order") String order) {
+		
+		return this.employeeService.fetchByOrder(order);
+		
 	}
 	
 }

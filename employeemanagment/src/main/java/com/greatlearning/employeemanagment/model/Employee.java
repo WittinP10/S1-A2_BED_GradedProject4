@@ -1,5 +1,7 @@
 package com.greatlearning.employeemanagment.model;
 
+import java.util.Comparator;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,3 +40,4 @@ public class Employee {
 	
 	
 }
+
